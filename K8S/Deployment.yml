@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: staticns
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +23,7 @@ spec:
         image: 783911693980.dkr.ecr.ap-south-1.amazonaws.com/staticweb:38
         ports:
         - containerPort: 80
-
+---
 apiVersion: v1
 kind: Service
 metadata:
