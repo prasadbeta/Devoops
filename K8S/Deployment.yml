@@ -31,7 +31,7 @@ metadata:
   namespace: staticns
 spec:
   selector:
-    app: static-deployment
+    app: static
   ports:
     - protocol: TCP
       port: 80
