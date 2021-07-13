@@ -1,4 +1,4 @@
-//load=`kubectl get ing -n staticns | awk 'NR==2{print $4}'`
+
 {
     "Comment": "CREATE/DELETE/UPSERT a record ",
     "Changes": [{
