@@ -36,4 +36,21 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: static-ingress
+ namespace: staticns
+ annotations:
+   kubernetes.io/ingress.class: nginx
+spec:
+ rules:
+ - host: app4k8s.motupatlurayachoty.xyz
+   http:
+     paths:
+     - path:
+       backend:
+         serviceName: static-svc
+         servicePort: 80
+---
