@@ -1,4 +1,4 @@
-load=`kubectl get ing -n staticns | awk 'NR==2{print $4}'`
+//load=`kubectl get ing -n staticns | awk 'NR==2{print $4}'`
 {
     "Comment": "CREATE/DELETE/UPSERT a record ",
     "Changes": [{
@@ -7,6 +7,6 @@ load=`kubectl get ing -n staticns | awk 'NR==2{print $4}'`
                             "Name": "app4k8s.motupatlurayachoty.xyz",
                             "Type": "CNAME",
                             "TTL": 60,
-                         "ResourceRecords": [{ "Value": "load"}]
+                         "ResourceRecords": [{ "Value": "a993a6bb66dc44593b6a710a0cd88739-77a7758b4ddfa62e.elb.us-east-2.amazonaws.com"}]
 }}]
 }
