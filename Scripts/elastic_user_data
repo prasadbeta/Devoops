@@ -1,0 +1,51 @@
+#!/bin/bash
+#update the repository
+apt-get update
+#upgrade the repository
+apt-get upgrade
+#install the java
+apt-get install default-jre -y
+#install the nginx
+apt-get install nginx -y
+#start the nginx
+systemctl start nginx
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list
+#update the repository
+apt-get update
+#install the elasticsearch
+apt-get install elasticsearch -y
+echo "network.host: 0.0.0.0
+http.cors.enabled: true" > /etc/elasticsearch/elasticsearch.yml
+#start the elasticsearch
+systemctl start elasticsearch
+#enable the elasticsearch
+systemctl enable elasticsearch
+#install the kibana
+apt-get install kibana -y
+#start the kibana
+systemctl start kibana
+#enable the kibana
+systemctl enable kibana
+echo "kibanaadmin:`openssl passwd -apr1`" | tee -a /etc/nginx/htpasswd.users
+echo "server {
+listen 80;
+
+server_name 54.244.12.65;
+
+auth_basic "Restricted Access";
+auth_basic_user_file /etc/nginx/htpasswd.users;
+
+location / {
+    proxy_pass http://localhost:5601;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+    }
+}" > /etc/nginx/sites-available/54.244.12.65
+ln -s /etc/nginx/sites-available/54.244.12.65 /etc/nginx/sites-enabled/54.244.12.65
+nginx -t
+systemctl restart nginx
+ufw allow 'Nginx Full'
