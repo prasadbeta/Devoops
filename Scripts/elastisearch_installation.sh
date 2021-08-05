@@ -29,7 +29,7 @@ systemctl start kibana
 systemctl enable kibana
 systemctl status kibana
 echo "kibanaadmin:`openssl passwd -apr1`" | tee -a /etc/nginx/htpasswd.users
-sudo nano /etc/nginx/sites-available/<public ip>
+vim /etc/nginx/sites-available/<public ip>
 --------------------
 server {
     listen 80;
