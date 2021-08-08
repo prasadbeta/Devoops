@@ -2,7 +2,7 @@
 #update the repository
 apt-get update
 #upgrade the repository
-apt-get upgrade
+apt-get upgrade -y
 #install the java
 apt-get install default-jre -y
 #install the nginx
